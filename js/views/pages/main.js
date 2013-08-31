@@ -17,40 +17,7 @@
       Main.prototype.template = '#main-template';
 
       Main.prototype.render = function() {
-        var Collection, Model, _ref1, _ref2;
-
-        Main.__super__.render.apply(this, arguments);
-        Model = (function(_super1) {
-          __extends(Model, _super1);
-
-          function Model() {
-            _ref1 = Model.__super__.constructor.apply(this, arguments);
-            return _ref1;
-          }
-
-          Model.prototype.backend = 'Users';
-
-          return Model;
-
-        })(B.Model);
-        Collection = (function(_super1) {
-          __extends(Collection, _super1);
-
-          function Collection() {
-            _ref2 = Collection.__super__.constructor.apply(this, arguments);
-            return _ref2;
-          }
-
-          Collection.prototype.model = Model;
-
-          Collection.prototype.backend = 'Users';
-
-          return Collection;
-
-        })(B.Collection);
-        this.collection = new Collection;
-        this.collection.url = 'Users';
-        return this.collection.fetch();
+        return Main.__super__.render.apply(this, arguments);
       };
 
       return Main;

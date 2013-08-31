@@ -6,25 +6,26 @@ require.config
 		marionette:		'lib/backbone.marionette'
 		babysitter:		'lib/backbone.babysitter'
 		wreq:			'lib/backbone.wreqr'
-		backboneio:		'lib/backboneio'
 		socketio:		'lib/socket.io'
+		backboneiosync:	'lib/backbone.iosync'
+		backboneiobind:	'lib/backbone.iobind'
 
 	shim:
-		backbone :
-			exports : 'Backbone'
-			deps : ['jquery','underscore']
-		
-		backboneio:	
-			deps : ['backbone','socketio']
+		backbone:
+			exports: 'Backbone'
+			deps: 	['jquery','underscore']
 
-		marionette : 
-			exports : 'Backbone.Marionette'
-			deps : ['backboneio']
+		backboneiosync:
+			deps: ['backbone', 'socketio']
 
-require ['marionette', 'router', 'backbone'], (M, Router, Backbone)->
+		backboneiobind:
+			deps: ['backboneiosync']
 
-	Backbone.io.connect()
+		marionette: 
+			exports: 'Backbone.Marionette'
+			deps: 	['backboneiobind']
 
+require ['marionette', 'router', 'backbone', 'socketio' ], (M, Router, B, io)->
 	GiftShop = new M.Application()
 	window.GiftShop = GiftShop
 	GiftShop.addRegions
@@ -37,6 +38,18 @@ require ['marionette', 'router', 'backbone'], (M, Router, Backbone)->
 	GiftShop.router = new Router
 	Backbone.history.start pushState: true
 
+	window.socket = io.connect('http://localhost')
+
+	setTimeout =>
+		class Model extends B.Model
+		class Collection extends B.Collection
+			# model: Model
+
+		@collection = new Collection
+		@collection.url = 'users'
+		@collection.fetch()
+		console.log 'fetch'
+	, 3000
 
 	$('#js-a').on 'click', ->
 			window.GiftShop.router.navigate('/about', {trigger: true})
