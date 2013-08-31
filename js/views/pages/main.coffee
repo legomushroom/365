@@ -5,14 +5,12 @@ define 'views/pages/main', ['views/pages/PageView', 'backbone'], (PageView, B)->
 		render:->
 			super
 
-			class Model extends B.Model
+			class Collection extends B.Collection
+				backend: 'mybackend'
 
-			@model = new Model
-			
-			@model.set 
-					name: 'Lego'
+			@collection = new Collection
 
-			@model.url = '/api/'
-			@model.save()
+			@collection.url = "/products"
+			@collection.fetch()
 
 	Main

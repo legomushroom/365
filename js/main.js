@@ -26,9 +26,10 @@
     }
   });
 
-  require(['marionette', 'router'], function(M, Router) {
+  require(['marionette', 'router', 'backbone'], function(M, Router, Backbone) {
     var GiftShop;
 
+    Backbone.io.connect();
     GiftShop = new M.Application();
     window.GiftShop = GiftShop;
     GiftShop.addRegions({

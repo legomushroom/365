@@ -21,7 +21,10 @@ require.config
 			exports : 'Backbone.Marionette'
 			deps : ['backboneio']
 
-require ['marionette', 'router'], (M, Router)->
+require ['marionette', 'router', 'backbone'], (M, Router, Backbone)->
+
+	Backbone.io.connect()
+
 	GiftShop = new M.Application()
 	window.GiftShop = GiftShop
 	GiftShop.addRegions
@@ -33,7 +36,6 @@ require ['marionette', 'router'], (M, Router)->
 	
 	GiftShop.router = new Router
 	Backbone.history.start pushState: true
-
 
 
 	$('#js-a').on 'click', ->
