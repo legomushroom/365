@@ -3,7 +3,6 @@ define 'router', ['backbone','controllers/pagesController'], (B, pc)->
 		routes:
 			'': 			'main'
 			'about': 		'about'
-			'about/': 		'about'
 
 		main:->
 			@startPage pc.main

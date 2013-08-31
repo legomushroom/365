@@ -7,16 +7,21 @@
       underscore: 'lib/lodash.underscore',
       marionette: 'lib/backbone.marionette',
       babysitter: 'lib/backbone.babysitter',
-      wreq: 'lib/backbone.wreqr'
+      wreq: 'lib/backbone.wreqr',
+      backboneio: 'lib/backboneio',
+      socketio: 'lib/socket.io'
     },
     shim: {
       backbone: {
         exports: 'Backbone',
         deps: ['jquery', 'underscore']
       },
+      backboneio: {
+        deps: ['backbone', 'socketio']
+      },
       marionette: {
         exports: 'Backbone.Marionette',
-        deps: ['backbone']
+        deps: ['backboneio']
       }
     }
   });
@@ -37,7 +42,7 @@
       pushState: true
     });
     return $('#js-a').on('click', function() {
-      return window.GiftShop.router.navigate('/about/', {
+      return window.GiftShop.router.navigate('/about', {
         trigger: true
       });
     });

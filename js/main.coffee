@@ -6,15 +6,20 @@ require.config
 		marionette:		'lib/backbone.marionette'
 		babysitter:		'lib/backbone.babysitter'
 		wreq:			'lib/backbone.wreqr'
+		backboneio:		'lib/backboneio'
+		socketio:		'lib/socket.io'
 
 	shim:
 		backbone :
 			exports : 'Backbone'
 			deps : ['jquery','underscore']
+		
+		backboneio:	
+			deps : ['backbone','socketio']
 
 		marionette : 
 			exports : 'Backbone.Marionette'
-			deps : ['backbone']
+			deps : ['backboneio']
 
 require ['marionette', 'router'], (M, Router)->
 	GiftShop = new M.Application()
@@ -32,4 +37,4 @@ require ['marionette', 'router'], (M, Router)->
 
 
 	$('#js-a').on 'click', ->
-			window.GiftShop.router.navigate('/about/', {trigger: true})
+			window.GiftShop.router.navigate('/about', {trigger: true})

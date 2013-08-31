@@ -3,7 +3,7 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  define('views/pages/main', ['views/pages/PageView'], function(PageView) {
+  define('views/pages/main', ['views/pages/PageView', 'backbone'], function(PageView, B) {
     var Main, _ref;
 
     Main = (function(_super) {
@@ -17,7 +17,26 @@
       Main.prototype.template = '#main-template';
 
       Main.prototype.render = function() {
-        return Main.__super__.render.apply(this, arguments);
+        var Model, _ref1;
+
+        Main.__super__.render.apply(this, arguments);
+        Model = (function(_super1) {
+          __extends(Model, _super1);
+
+          function Model() {
+            _ref1 = Model.__super__.constructor.apply(this, arguments);
+            return _ref1;
+          }
+
+          return Model;
+
+        })(B.Model);
+        this.model = new Model;
+        this.model.set({
+          name: 'Lego'
+        });
+        this.model.url = '/api/';
+        return this.model.save();
       };
 
       return Main;
