@@ -40,16 +40,12 @@ require ['marionette', 'router', 'backbone', 'socketio' ], (M, Router, B, io)->
 
 	window.socket = io.connect('http://localhost')
 
-	setTimeout =>
-		class Model extends B.Model
-		class Collection extends B.Collection
-			# model: Model
-
-		@collection = new Collection
-		@collection.url = 'users'
-		@collection.fetch()
-		console.log 'fetch'
-	, 3000
 
 	$('#js-a').on 'click', ->
-			window.GiftShop.router.navigate('/about', {trigger: true})
+		class Model extends B.Model
+			urlRoot: 'post'
+		class Collection extends B.Collection
+		@collection = new Collection
+		@collection.url = 'posts'
+		@collection.fetch()
+		console.log 'fetch'

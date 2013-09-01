@@ -34,8 +34,7 @@
   });
 
   require(['marionette', 'router', 'backbone', 'socketio'], function(M, Router, B, io) {
-    var GiftShop,
-      _this = this;
+    var GiftShop;
 
     GiftShop = new M.Application();
     window.GiftShop = GiftShop;
@@ -50,7 +49,7 @@
       pushState: true
     });
     window.socket = io.connect('http://localhost');
-    setTimeout(function() {
+    return $('#js-a').on('click', function() {
       var Collection, Model, _ref, _ref1;
 
       Model = (function(_super) {
@@ -60,6 +59,8 @@
           _ref = Model.__super__.constructor.apply(this, arguments);
           return _ref;
         }
+
+        Model.prototype.urlRoot = 'post';
 
         return Model;
 
@@ -75,15 +76,10 @@
         return Collection;
 
       })(B.Collection);
-      _this.collection = new Collection;
-      _this.collection.url = 'users';
-      _this.collection.fetch();
+      this.collection = new Collection;
+      this.collection.url = 'posts';
+      this.collection.fetch();
       return console.log('fetch');
-    }, 3000);
-    return $('#js-a').on('click', function() {
-      return window.GiftShop.router.navigate('/about', {
-        trigger: true
-      });
     });
   });
 
